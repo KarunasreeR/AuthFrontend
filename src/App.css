@@ -37,20 +37,15 @@ h1 {
 
  */
 .links {
-  color: white;
-  padding: 5px;
+  color: black;
   text-decoration: none;
 }
-.links:hover {
-  border: 3px solid white;
-  color: white;
-}
 .active {
-  border: 3px solid white;
+  border-bottom: 5px solid rgb(56, 56, 56);
 }
 h1 {
   text-align: center;
-  border-bottom: 3px solid maroon;
+  padding-bottom: 40px;
 }
 .error,
 .msg {
@@ -61,4 +56,19 @@ h1 {
 }
 .msg {
   color: green;
+}
+
+.content-wrapper {
+  background: linear-gradient(to top, #1066cf, #88c6d3, #af7bd1, #dfbbdb);
+}
+
+.login-btn {
+  background: radial-gradient(circle, #1066cf, #88c6d3, #af7bd1, #dfbbdb);
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 15px;
+}
+.min-w-50 {
+  min-width: 30%;
 }

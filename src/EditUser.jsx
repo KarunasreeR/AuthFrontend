@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { Card } from "reactstrap";
 
 export default function EditUser() {
   const loggedUser = localStorage.getItem("user");
@@ -45,11 +46,15 @@ export default function EditUser() {
     };
     console.log(userOb);
     axios
-      .put(`https://authbackend-uoeq.onrender.com/users/${loggedUser}`, userOb, {
-        headers: {
-          token,
-        },
-      })
+      .put(
+        `https://authbackend-uoeq.onrender.com/users/${loggedUser}`,
+        userOb,
+        {
+          headers: {
+            token,
+          },
+        }
+      )
       .then((res) => {
         console.log(res.data);
         setMsg(res.data.data);
@@ -59,82 +64,86 @@ export default function EditUser() {
       });
   };
   return (
-    <div className="fluid-container border w-50 border-primary w-25 mx-auto mt-3 p-3">
-      {login ? (
-        <div className="file-form">
-          <h1>Edit Details</h1>
-          <form onSubmit={editUser}>
-            <div className="form-label">
-              <b>Enter Email:</b>
+    <div className="d-flex align-items-center justify-content-center h-100">
+      <div className="min-w-50 w-sm-75 w-md-50">
+        <Card body>
+          {login ? (
+            <div className="file-form">
+              <h1>Edit Details</h1>
+              <form onSubmit={editUser}>
+                <div className="form-label">
+                  <b>Enter Email:</b>
+                </div>
+                <input
+                  type="email"
+                  placeholder="Email"
+                  name="email"
+                  required
+                  value={email}
+                  className="w-100 p-2 mb-2"
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                  }}
+                />
+                <br />
+                <div className="form-label">
+                  <b>Enter Username:</b>
+                </div>
+                <input
+                  type="text"
+                  placeholder="Username"
+                  name="name"
+                  required
+                  value={name}
+                  className="w-100 p-2 mb-2"
+                  onChange={(e) => {
+                    setName(e.target.value);
+                  }}
+                />
+                <br />
+                <div className="form-label">
+                  <b>Enter Password:</b>
+                </div>
+                <input
+                  type="password"
+                  placeholder="Password"
+                  name="password"
+                  required
+                  className="w-100 p-2 mb-2"
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                  }}
+                />
+                <br />
+                <div className="form-label">
+                  <b>Enter Date of Birth:</b>
+                </div>
+                <input
+                  type="date"
+                  placeholder="date of birth"
+                  name="dob"
+                  required
+                  value={dob}
+                  className="w-100 p-2 mb-2"
+                  onChange={(e) => {
+                    setDob(e.target.value);
+                  }}
+                />
+                <br />
+                <button
+                  type="submit"
+                  className="login-btn p-2 mt-4 mx-auto w-100"
+                >
+                  Save
+                </button>
+              </form>
+              <p className="text-success p-2 text-center">{msg}</p>
             </div>
-            <input
-              type="email"
-              placeholder="Email"
-              name="email"
-              required
-              value={email}
-              className="w-100 p-2 mb-2"
-              onChange={(e) => {
-                setEmail(e.target.value);
-              }}
-            />
-            <br />
-            <div className="form-label">
-              <b>Enter Username:</b>
-            </div>
-            <input
-              type="text"
-              placeholder="Username"
-              name="name"
-              required
-              value={name}
-              className="w-100 p-2 mb-2"
-              onChange={(e) => {
-                setName(e.target.value);
-              }}
-            />
-            <br />
-            <div className="form-label">
-              <b>Enter Password:</b>
-            </div>
-            <input
-              type="password"
-              placeholder="Password"
-              name="password"
-              required
-              className="w-100 p-2 mb-2"
-              onChange={(e) => {
-                setPassword(e.target.value);
-              }}
-            />
-            <br />
-            <div className="form-label">
-              <b>Enter Date of Birth:</b>
-            </div>
-            <input
-              type="date"
-              placeholder="date of birth"
-              name="dob"
-              required
-              value={dob}
-              className="w-100 p-2 mb-2"
-              onChange={(e) => {
-                setDob(e.target.value);
-              }}
-            />
-            <br />
-            <button
-              type="submit"
-              className="btn btn-primary btn-lg m-2 mx-auto w-100"
-            >
-              Save
-            </button>
-          </form>
-          <p className="msg">{msg}</p>
-        </div>
-      ) : (
-        <p>Please Login</p>
-      )}
+          ) : (
+            <p>Please Login</p>
+          )}
+        </Card>
+      </div>
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { Card } from "reactstrap";
 
 export default function Members() {
   const token = localStorage.getItem("token");
@@ -13,7 +14,9 @@ export default function Members() {
       setLogin(true);
       console.log(token);
       axios
-        .get(`https://authbackend-uoeq.onrender.com/users/list`, { headers: { token } })
+        .get(`https://authbackend-uoeq.onrender.com/users/list`, {
+          headers: { token },
+        })
         .then((res) => {
           console.log(res.data);
           setUsers(res.data);
@@ -25,28 +28,40 @@ export default function Members() {
     }
   }, []);
   return (
-    <div>
-      {login ? (
-        <div className="file-form">
-          <h1>Users Details</h1>
-          <div className="w-75 mx-auto mt-4">
-            <div className="row w-100 border border-info p-2 ">
-              <div className="col h5">Email</div>
-              <div className="col h5">Name</div>
-              <div className="col h5">Date of birth</div>
-            </div>
-            {users.map((user) => (
-              <div className="row w-100 border border-info p-2 ">
-                <div className="col">{user.email}</div>
-                <div className="col">{user.name}</div>
-                <div className="col">{user.dob}</div>
+    <div className="container mt-5">
+      <div className="row justify-content-center">
+        {login ? (
+          <div className="col-lg-8 col-md-10">
+            <div className="bg-light border rounded p-4 shadow-sm">
+              <h1 className="mb-4 text-center">Users Details</h1>
+              <div className="table-container">
+                <div style={{ maxHeight: "400px", overflowY: "auto" }}>
+                  <table className="table table-bordered table-hover">
+                    <thead className="table-info">
+                      <tr>
+                        <th>Email</th>
+                        <th>Name</th>
+                        <th>Date of Birth</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {users.map((user) => (
+                        <tr key={user.email}>
+                          <td>{user.email}</td>
+                          <td>{user.name}</td>
+                          <td>{user.dob}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
               </div>
-            ))}
+            </div>
           </div>
-        </div>
-      ) : (
-        <p>Please Login</p>
-      )}
+        ) : (
+          <p className="text-center mt-4">Please Login</p>
+        )}
+      </div>
     </div>
   );
 }

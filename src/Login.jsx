@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { NavLink } from "react-router-dom";
+import { Card, Col, Row } from "reactstrap";
 
 export default function Login() {
   const [error, setError] = useState("");
@@ -33,54 +34,51 @@ export default function Login() {
   };
 
   return (
-    <div className="fluid-container border w-50 border-primary w-25 mx-auto mt-3 p-3">
-      <h1>Login Here</h1>
-      <p className="error">{error}</p>
-      <form onSubmit={getUser}>
-        <div className="form-label">
-          <b>Enter Email:</b>
-        </div>
-        <input
-          type="email"
-          placeholder="Email"
-          name="email"
-          required
-          className="w-100 p-2 mb-2"
-        />
-        <br />
-        <div className="form-label">
-          <b>Enter Password:</b>
-        </div>
-        <input
-          type="password"
-          placeholder="password"
-          name="password"
-          required
-          className="w-100 p-2 mb-2"
-        />
-        <br />
-        <button
-          type="submit"
-          className="btn btn-primary btn-lg m-2 mx-auto w-100"
-        >
-          Login
-        </button>
-      </form>
-      <div>
-        <NavLink
-          activeClassName="active"
-          className="links"
-          to="/forgotpassword"
-        >
-          <button
-            type="button"
-            className="btn btn-secondary btn-lg m-2 mx-auto w-100"
-          >
-            Forgot Password
-          </button>
-        </NavLink>
+    <div className="d-flex align-items-center justify-content-center h-100">
+      <div className="min-w-50 w-sm-75 w-md-50">
+        <Card body>
+          <h1>Login</h1>
+          <form onSubmit={getUser}>
+            <div className="form-label">
+              <b>Enter Email:</b>
+            </div>
+            <input
+              type="email"
+              placeholder="Email"
+              name="email"
+              required
+              className="w-100 p-2 mb-2"
+            />
+            <br />
+            <div className="form-label">
+              <b>Enter Password:</b>
+            </div>
+            <input
+              type="password"
+              placeholder="password"
+              name="password"
+              required
+              className="w-100 p-2 mb-2"
+            />
+            <br />
+            <p className="text-danger text-start">{error}</p>
+            <div className="d-flex justify-content-end">
+              <NavLink
+                activeClassName="active w-25"
+                className="links"
+                to="/forgotpassword"
+              >
+                {" "}
+                <p className="text-end">Forgot Password</p>
+              </NavLink>
+            </div>
+            <button type="submit" className="login-btn p-2 mx-auto w-100">
+              Login
+            </button>
+          </form>
+          <p className="text-success text-center">{msg}</p>
+        </Card>
       </div>
-      <p className="msg">{msg}</p>
     </div>
   );
 }

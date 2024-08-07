@@ -1,6 +1,12 @@
 import "./App.css";
 import React, { useEffect, useState } from "react";
-import { BrowserRouter, Routes, Route, NavLink } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  NavLink,
+  Navigate,
+} from "react-router-dom";
 import Register from "./Register";
 import Login from "./Login";
 import Members from "./Members";
@@ -17,57 +23,78 @@ function App() {
     } else {
       setLogin(false);
     }
-  });
+  }, []);
   return (
-    // eslint-disable-next-line react/jsx-filename-extension
-    <BrowserRouter>
-      <div className="nav fluid-container bg-dark">
+    <div
+      className="d-flex flex-column align-items-stretch"
+      style={{ height: "100vh" }}
+    >
+      <BrowserRouter>
         {login ? (
-          <div className="row w-100 p-2 m-2">
-            <div className="col">
-              <NavLink activeClassName="active" className="links" to="/members">
-                Members
+          <div className="d-flex justify-content-around p-2">
+            <div className="">
+              <NavLink
+                activeClassName="active"
+                className="p-2 links"
+                to="/members"
+              >
+                Users
               </NavLink>
             </div>
-            <div className="col">
-              <NavLink activeClassName="active" className="links" to="/edit">
+            <div className="">
+              <NavLink
+                activeClassName="active"
+                className="p-2 links"
+                to="/edit"
+              >
                 Edit User
               </NavLink>
             </div>
-            <div className="col-10 text-end">
-              <NavLink activeClassName="active" className="links" to="/logout">
+            <div className="">
+              <NavLink
+                activeClassName="active"
+                className="p-2 links"
+                to="/logout"
+              >
                 logout
               </NavLink>
             </div>
           </div>
         ) : (
-          <div className="row w-100 p-2 m-2">
-            <div className="col-1">
+          <div className="d-flex justify-content-around p-2 ">
+            <div className="">
               <NavLink
                 activeClassName="active"
-                className="links"
+                className="p-2 links"
                 to="/register"
               >
                 Register
               </NavLink>
             </div>
-            <div className="col-1">
-              <NavLink activeClassName="active" className="links" to="/login">
+            <div className="">
+              <NavLink
+                activeClassName="active"
+                className="p-2 links"
+                to="/login"
+              >
                 Login
               </NavLink>
             </div>
           </div>
         )}
-      </div>
-      <Routes>
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/members" element={<Members />} />
-        <Route path="/edit" element={<EditUser />} />
-        <Route path="/logout" element={<Logout />} />
-        <Route path="/forgotpassword" element={<ForgotPassword />} />
-      </Routes>
-    </BrowserRouter>
+        <div className="bg-primary h-100 content-wrapper">
+          <Routes>
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/members" element={<Members />} />
+            <Route path="/edit" element={<EditUser />} />
+            <Route path="/logout" element={<Logout />} />
+            <Route path="/forgotpassword" element={<ForgotPassword />} />
+            <Route path="*" element={<Navigate to="/login" />} />
+          </Routes>
+        </div>
+      </BrowserRouter>
+    </div>
   );
 }
 
