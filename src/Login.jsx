@@ -24,7 +24,7 @@ export default function Login() {
           localStorage.setItem("user", event.target.email.value);
           setMsg("login success");
           setError("");
-          window.location.pathname = "/members";
+          window.location.pathname = "/users";
         }
         console.log(res.data);
       })

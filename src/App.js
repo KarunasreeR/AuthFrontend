@@ -36,7 +36,7 @@ function App() {
               <NavLink
                 activeClassName="active"
                 className="p-2 links"
-                to="/members"
+                to="/users"
               >
                 Users
               </NavLink>
@@ -86,7 +86,7 @@ function App() {
           <Routes>
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/members" element={<Members />} />
+            <Route path="/users" element={<Members />} />
             <Route path="/edit" element={<EditUser />} />
             <Route path="/logout" element={<Logout />} />
             <Route path="/forgotpassword" element={<ForgotPassword />} />
